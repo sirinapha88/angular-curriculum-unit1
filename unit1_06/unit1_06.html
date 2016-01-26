@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app='firstApp'>
+<head>
+	<meta charset="utf-8">
+	<title>Scope Sample</title>
+	<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type='text/javascript' src= 'app.js'></script>
+</head>
+<body>
+	<div class="container">
+		<div ng-controller="MyFirstController">
+		  <h1>My name is: {{name}}</h1>
+		  <input ng-model="name" type="text" placeholder="What is your name">
+		</div>
+		<div ng-controller="ExercisesController">
+		  <h1>My favorite color is: {{favColor}}</h1>
+		  <input ng-model="favColor" type="text" placeholder="What is your favorite color">
+		</div>
+
+		<div ng-controller="secondsInACentury">
+		  <h1>The second century is: {{secondTime}}</h1>
+		</div>
+
+		<div ng-controller="rightNow">
+		  <h1>Current Time is: {{currentTime}}</h1>
+		</div>
+	
+	</div>
+
+</body>
+</html>

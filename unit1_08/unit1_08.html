@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+<head>
+	<meta charset="utf-8">
+	<title>Events</title>
+	<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type='text/javascript' src= 'app.js'></script>
+</head>
+<body ng-controller="MyFirstController">
+	<div class="container">
+		<h3>The number is: {{number}}</h3>
+		<button ng-click="pickRandomNumber()">Pick Random Number</button>
+		<h2>Word reverser!</h2>
+		<input type="text" ng-model="text" placeholder="Text to reverse">
+		<p> Your word is: {{text}} </p>
+		<button ng-click="reverseText()">Reverse!</button>
+
+		<h1>Ping Pong Score Keeper</h1>
+		<div ng-controller="PingPongCount">
+			<button ng-click="player1 = player1 + 1"><p>Player 1</p> {{player1}} <p>{{text}}</p></button>
+			<button ng-click="player2 = player2 + 1"><p>Player 2</p> {{player2}} <p>{{text}}</p></button>
+		</div>
+
+		<h3>The div was entered {{enterCount}} times</h3>
+		<div class="divbox" ng-mouseenter="enterCount = enterCount + 1">
+		</div>
+
+		<h3>Random Color</h3>
+		<div class="divbox" ng-mouseenter="randomColor()" ng-style="{'background-color':color}">
+		</div>
+		
+		<h1>Address Form</h1>
+		<div ng-controller="addressForm">
+			<form ng-submit="submit()">
+				<label for="street1">Street (line 1)</label>
+			    <input type="text" ng-model="street1" value="" placeholder="Street (line 1)">
+			  	<br>
+			    <label for="street2">Street (line 2)</label>
+			    <input type="text" ng-model="street2" value="" placeholder="Street (line 2)">
+			  	<br>
+			    <label for="city">City</label>
+			    <input type="text" ng-model="city"  placeholder="City">
+			  	<br>
+			    <label for="state">State</label>
+			    <input type="text" ng-model="state"  placeholder="State">
+			  	<br>
+			  	<label for="zipcode">Zip Code</label>
+			    <input type="text" ng-model="zipcode"  placeholder="Zip Code">
+			  	<br>
+			  	
+			  	<div >
+				 <button class="btn btn-success btn-large center" type="submit">Submit</button>
+				</div>
+				
+				<div ng-repeat= "item in list ">
+					<p> Your address is: {{street1}}, {{street2}} City: {{city}} State: {{state}} Zip Code:  {{zipcode}}</p>
+				</div>
+				<button class="btn btn-danger btn-large center"  type="reset" ng-click="reset()">Reset</button>
+			</form>
+		</div>
+
+		<h1>Contact List</h1>
+		<div ng-controller="contactList">
+			<input type="text" ng-model="search" placeholder="Search" />
+			<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+			<form ng-submit="addList()" name="myForm">
+				<label for="name">Name</label>
+			    <input type="text" ng-model="name" value="" placeholder="Name">
+			  
+			    <label for="email">Email</label>
+			    <input type="text" ng-model="email" value="" placeholder="Email">
+			  
+			    <label for="phone">Phone</label>
+			    <input type="text" ng-model="phone"  placeholder="Phone">
+			  				  	
+				<button class="btn btn-success btn-large center" type="submit">Add Contact</button>				
+			</form>
+			<table class="table">
+				<thead>
+			    <tr>
+			       	<th>Name</th>
+			        <th>Email</th>
+			        <th>Phone</th>
+			    </tr>
+			    </thead>
+			    <tbody>
+			    <tr ng-repeat="item in list | filter:search">
+				    <td>{{item.name}}</td>
+				    <td>{{item.email}}</td>
+				    <td>{{item.phone}}</td>
+				</tr>
+				</tbody>
+  			</table>
+
+		</div>
+	</div>
+
+</body>
+</html>
