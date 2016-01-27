@@ -26,8 +26,13 @@ app.controller("redditController", function($scope){
 	        {
 	          	author: "Matt",
 	          	text: "Cool costume."
-	        }
-	      	]
+	        }, {
+	        	author: "David",
+	          	text: "Cool!"
+	        }, {
+	        	author: "Ana",
+	          	text: "Awesome!"
+	        }]
   		},{
   			title: "Spy on your competition",
 	  		author: "Ana",
@@ -51,6 +56,9 @@ app.controller("redditController", function($scope){
 	        {
 	          	author: "David",
 	          	text: "Cool!"
+	        },{
+	        	author: "Ana",
+	          	text: "Awesome!"
 	        }]
 	    }
   	];

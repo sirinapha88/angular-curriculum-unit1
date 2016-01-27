@@ -11,8 +11,8 @@
 	<script type='text/javascript' src= 'app.js'></script>
 </head>
 <body ng-controller="redditController">
-
-	<div class="container">
+	<nav class="navbar navbar-default">
+	<div class="container-fluid">
 		<ul class="nav nav-tabs"> 
   			<li role="presentation" class="active"><a href="#">Reddit Clone</a></li>	
   			<li role="presentation">
@@ -34,7 +34,8 @@
           		</ul>
         	</li>
 		</ul>
-
+		</nav>
+	</div> <!-- end container -->
 		<div>
 			<form ng-show="showTheForm" name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
   					<div class="form-group" ng-class="{ 'has-error' : userForm.title.$invalid && !userForm.title.$pristine ,'has-success' : userForm.title.$valid }">
@@ -66,49 +67,52 @@
 				    <button>Submit</button>
 				</form>
 		</div> <!-- end form -->
+	<div class="container">
+		<div class="well" ng-repeat="item in view.posts | filter:view.search">
+			<div class="row">
+		  		<div class="col-xs-2"><img ng-src="{{item.imgURL}}"></div>
+		  			<div class="col-xs-10">
+			  		<h3>{{item.title}} |
+				  		<span class="glyphicon glyphicon-arrow-up" ng-click="updateVotes(item,1)"></span> 
+			          	<span class="glyphicon glyphicon-arrow-down" ng-click="updateVotes(item,-1)"></span>
+			          	<span ng-class="upvoteClass(item)">{{ item.votes }}</span>
+					</h3>
+			  		<h4>By {{item.author}}</h4>
+			  		<p>{{item.desc}}</p>
+			  		<span class="glyphicon glyphicon-calendar"></span>{{date}} | 
+			  		<span class="hoverable"> 
 
-		<div ng-repeat="item in view.posts | filter:view.search">
-			
-	  		<img ng-src="{{item.imgURL}}">
-	  		<h3>{{item.title}} |
-		  		<span class="glyphicon glyphicon-arrow-up" ng-click="updateVotes(item,1)"></span> 
-	          	<span class="glyphicon glyphicon-arrow-down" ng-click="updateVotes(item,-1)"></span>
-	          	<span ng-class="upvoteClass(item)">{{ item.votes }}</span>
-			</h3>
-	  		<h4>By {{item.author}}</h4>
-	  		<p>{{item.desc}}</p>
-	  		<span class="glyphicon glyphicon-calendar"></span>{{date}} | 
-	  		<span class="hoverable"> 
+		    		<span class="glyphicon glyphicon-comment" ng-click="showComment = !showComment">
+		   				<ng-pluralize count="item.comments.length" when="{1: '1 comment', 'other': '{{ item.comments.length }} comments'}"></ng-pluralize>
+		   			</span>
+			  		
+			  		<span class="hoverable" ng-click="showTheForm = !showTheForm"> |
+			            <span class="glyphicon glyphicon-pencil" ></span>
+			            Add comment
+		          		</span>
+		          	</span>
 
-    		<span class="glyphicon glyphicon-comment" ng-click="showComment = !showComment">
-   				<ng-pluralize count="item.comments.length" when="{1: '1 comment', 'other': '{{ item.comments.length }} comments'}"></ng-pluralize>
-   			</span>
-	  		
-	  		<span class="hoverable" ng-click="showTheForm = !showTheForm"> |
-	            <span class="glyphicon glyphicon-pencil" ></span>
-	            Add comment
-          		</span>
-          	</span>
-
-          	<div class="comment" ng-show="showComment" ng-repeat="comment in item.comments">
-          		<p><strong>{{ comment.author }}</strong> - {{ comment.text }}
-          		</p>
-        	</div>
-          	
-          	<div>
-          		<form class="form-inline" ng-submit="addComment(item,newComment)" ng-show="showTheForm">
-	          		<div class="form-group">
-		              	<label for="author">Author</label>
-		              	<input type="text" placeholder="author" class="form-control" ng-model="newComment.author">
-	            	</div>
-	            	<div class="form-group">
-		              <label for="text">Text</label>
-		              <input type="text" placeholder="text" class="form-control" ng-model="newComment.text">
-	            	</div>
-	            	<input class="btn btn-success" type="submit" value="Add Comment">
-	          	</form>
-          	</div>
-		</div> <!-- end display -->
+		          	<div class="comment" ng-show="showComment" ng-repeat="comment in item.comments">
+		          		<p><strong>{{ comment.author }}</strong> - {{ comment.text }}
+		          		</p>
+		        	</div>
+		          	
+		          	<div>
+		          		<form class="form-inline" ng-submit="addComment(item,newComment)" ng-show="showTheForm">
+			          		<div class="form-group">
+				              	<label for="author">Author</label>
+				              	<input type="text" placeholder="author" class="form-control" ng-model="newComment.author">
+			            	</div>
+			            	<div class="form-group">
+				              <label for="text">Text</label>
+				              <input type="text" placeholder="text" class="form-control" ng-model="newComment.text">
+			            	</div>
+			            	<input class="btn btn-success" type="submit" value="Add Comment">
+			          	</form>
+		          	</div>
+				</div> <!-- end display -->
+			</div>
+		</div> <!-- end div row -->
 		
 	</div> <!-- end container -->
 
